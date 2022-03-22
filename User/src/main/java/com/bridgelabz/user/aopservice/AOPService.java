@@ -20,22 +20,25 @@ public class AOPService {
 
     public AOPService() {
     }
-
+	//logs method before hitting API
     @Before("execution(* com.bridgelabz.user.controller.UserController.*(..))")
     public void logBeforeV1(JoinPoint joinPoint) {
         log.info("Initiating API : " + joinPoint.getSignature().getName() + " ");
     }
-
+    
+    //logs method After hitting API
     @After("execution(* com.bridgelabz.user.controller.UserController.*(..))")
     public void logAfter(JoinPoint joinPoint) {
         log.info("API successfully Executed : " + joinPoint.getSignature().getName() + " ");
     }
-
+    
+    //logs method After hitting API
     @AfterReturning("execution(* com.bridgelabz.user.service.UserService.*(..))")
     public void logAfterReturning(JoinPoint joinPoint) {
         log.info("User returned to controller : " + joinPoint.getSignature().getName() + " ");
     }
-
+    
+    //logs parameters After hitting API
     @After("execution(* com.bridgelabz.user.controller.UserController.*(..))")
     public void logAfterAndSaveArgs(JoinPoint joinPoint) {
         log.info("After : " + Arrays.toString(joinPoint.getArgs()));
